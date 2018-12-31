@@ -158,7 +158,17 @@ exports.route = (app) => {
       };
     });
 
-    res.json(retData);
+    const sortedRetData = [];
+    for(data of retData) {
+      if(data.cat) {
+        sortedRetData.push({ cat: data.cat, children: [] });
+      } else {
+        const curCat = sortedRetData[sortedRetData.length - 1];
+        curCat.children.push(data);
+      }
+    }
+
+    res.json(sortedRetData);
     
   });
 }
