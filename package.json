@@ -1,0 +1,31 @@
+{
+  "name": "global-server",
+  "version": "1.0.0",
+  "description": "A server for landoftherair/global",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon --exec node -- index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landoftherair/global-server.git"
+  },
+  "author": "Kyle Kemp <kyle@seiyria.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/landoftherair/global-server/issues"
+  },
+  "homepage": "https://github.com/landoftherair/global-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mongodb": "^2.2.27",
+    "numeral": "^2.0.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
