@@ -76,6 +76,36 @@ const allQueries = [
     }
   },
 
+  { cat: 'World Leaders' },
+
+  {
+    name: 'Most Steps Taken',
+    query: { 'statistics.stepsTaken': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.stepsTaken': 1 },
+    params: { sort: { 'statistics.stepsTaken': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'statistics.name'),
+        value: `${numeral(get(x, `statistics.stepsTaken`)).format('0a')} Steps`,
+        exactValue: get(x, `statistics.stepsTaken`).toLocaleString()
+      };
+    }
+  },
+
+  {
+    name: 'Most NPCs Greeted',
+    query: { 'statistics.npcsGreeted': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.npcsGreeted': 1 },
+    params: { sort: { 'statistics.npcsGreeted': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'statistics.name'),
+        value: `${numeral(get(x, `statistics.npcsGreeted`)).format('0a')} NPCs`,
+        exactValue: get(x, `statistics.npcsGreeted`).toLocaleString()
+      };
+    }
+  },
+  
   { cat: 'Slaying Leaders' },
 
   {
@@ -116,6 +146,34 @@ const allQueries = [
         name: get(x, 'statistics.name'),
         value: `${numeral(get(x, `statistics.bestKillstreak`)).format('0a')} Kills`,
         exactValue: get(x, 'statistics.bestKillstreak').toLocaleString()
+      };
+    }
+  },
+  
+  {
+    name: 'Most Times Stripped',
+    query: { 'statistics.timesStripped': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.timesStripped': 1 },
+    params: { sort: { 'statistics.timesStripped': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'statistics.name'),
+        value: `${numeral(get(x, `statistics.timesStripped`)).format('0a')} Times`,
+        exactValue: get(x, `statistics.timesStripped`).toLocaleString()
+      };
+    }
+  },
+  
+  {
+    name: 'Most Lairs Killed',
+    query: { 'statistics.lairsKilled': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.lairsKilled': 1 },
+    params: { sort: { 'statistics.lairsKilled': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'statistics.name'),
+        value: `${numeral(get(x, `statistics.lairsKilled`)).format('0a')} Times`,
+        exactValue: get(x, `statistics.lairsKilled`).toLocaleString()
       };
     }
   },
