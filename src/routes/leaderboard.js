@@ -70,7 +70,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.axp`)).format('0a')} AXP`,
+        value: `${numeral(get(x, `statistics.axp`)).format('0.0a')} AXP`,
         exactValue: get(x, 'statistics.axp').toLocaleString()
       };
     }
@@ -86,7 +86,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.stepsTaken`)).format('0a')} Steps`,
+        value: `${numeral(get(x, `statistics.stepsTaken`)).format('0.0a')} Steps`,
         exactValue: get(x, `statistics.stepsTaken`).toLocaleString()
       };
     }
@@ -100,7 +100,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.npcsGreeted`)).format('0a')} NPCs`,
+        value: `${numeral(get(x, `statistics.npcsGreeted`)).format('0.0a')} NPCs`,
         exactValue: get(x, `statistics.npcsGreeted`).toLocaleString()
       };
     }
@@ -116,7 +116,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.kills`)).format('0a')} Kills`,
+        value: `${numeral(get(x, `statistics.kills`)).format('0.0a')} Kills`,
         exactValue: get(x, `statistics.kills`).toLocaleString()
       };
     }
@@ -130,7 +130,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.deaths`)).format('0a')} Deaths`,
+        value: `${numeral(get(x, `statistics.deaths`)).format('0.0a')} Deaths`,
         exactValue: get(x, 'statistics.deaths').toLocaleString()
       };
     }
@@ -144,7 +144,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.bestKillstreak`)).format('0a')} Kills`,
+        value: `${numeral(get(x, `statistics.bestKillstreak`)).format('0.0a')} Kills`,
         exactValue: get(x, 'statistics.bestKillstreak').toLocaleString()
       };
     }
@@ -158,7 +158,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.timesStripped`)).format('0a')} Times`,
+        value: `${numeral(get(x, `statistics.timesStripped`)).format('0.0a')} Times`,
         exactValue: get(x, `statistics.timesStripped`).toLocaleString()
       };
     }
@@ -172,7 +172,7 @@ const allQueries = [
     formatter: (x) => {
       return {
         name: get(x, 'statistics.name'),
-        value: `${numeral(get(x, `statistics.lairsKilled`)).format('0a')} Times`,
+        value: `${numeral(get(x, `statistics.lairsKilled`)).format('0.0a')} Times`,
         exactValue: get(x, `statistics.lairsKilled`).toLocaleString()
       };
     }
