@@ -15,6 +15,9 @@ class Database {
         console.log('Connected to ' + DB_URI);
   
         const db = client.db('landoftherair2');
+        this.$accounts = db.collection('account');
+        this.$players = db.collection('player');
+        this.$accountBanks = db.collection('account-bank');
         this.$statistics = db.collection('player-statistics');
         resolve();
       });
