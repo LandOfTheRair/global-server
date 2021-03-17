@@ -9,14 +9,13 @@ if(!DB_URI) {
 class Database {
   constructor() {
     this.isReady = new Promise((resolve, reject) => {
-      MongoClient.connect(DB_URI, (err, client) => {
-        if(err) {
-          return reject(err);
-        }
+      const client = new MongoClient(process.env.MONGODB_URI, { useUnifiedTopology: true });
+      client.connect().then(() => {
 
         console.log('Connected to ' + DB_URI);
-
-        this.$statistics = client.collection('characterStatistics');
+  
+        const db = client.db('landoftherair2');
+        this.$statistics = db.collection('player-statistics');
         resolve();
       });
     });
