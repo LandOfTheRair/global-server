@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 ADD https://www.google.com /time.now
 COPY ./package.json /usr/src/app
 COPY ./package-lock.json /usr/src/app
+COPY ./index.js /usr/src/app/index.js
+COPY ./src /usr/src/app/src
 RUN npm install
 ENV NODE_ENV production
 ENV PORT 80
