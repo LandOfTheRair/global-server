@@ -12,14 +12,14 @@ const allQueries = [
 
   {
     name: 'Most Experienced',
-    query: { 'statistics.xp': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.xp': 1, 'statistics.level': 1 },
-    params: { sort: { 'statistics.xp': -1 }, limit: RUNNER_UPS },
+    query: { 'xp': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'xp': 1, 'level': 1 },
+    params: { sort: { 'xp': -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
         name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.xp`, 0)).format('0.000a')} XP (Lv. ${get(x, 'statistics.level', 0)})`,
-        exactValue: get(x, 'statistics.xp', 0).toLocaleString()
+        value: `${numeral(get(x, `xp`, 0)).format('0.000a')} XP (Lv. ${get(x, 'level', 0)})`,
+        exactValue: get(x, 'xp', 0).toLocaleString()
       };
     }
   },
