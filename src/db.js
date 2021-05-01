@@ -19,6 +19,7 @@ class Database {
         this.$players = db.collection('player');
         this.$accountBanks = db.collection('account-bank');
         this.$statistics = db.collection('player-statistics');
+        this.$items = db.collection('player-items');
         resolve();
       });
     });
