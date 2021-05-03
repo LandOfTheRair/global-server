@@ -18,7 +18,11 @@ exports.route = (app) => {
     const items = await DB.$items.findOne({ _id: ObjectId(player._items) });
     if(!items) return res.json({});
 
+    const statistics = await DB.$statistics.findOne({ _id: ObjectId(player._statistics) });
+    if(!statistics) return res.json({});
+
     player.items = items;
+    player.statistics = statistics;
 
     res.json(player);
   });
