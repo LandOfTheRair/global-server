@@ -139,6 +139,50 @@ const allQueries = [
       };
     }
   },
+  
+  { cat: 'Crafting Leaders' },
+  
+  {
+    name: 'Most Alchemy Crafts',
+    query: { 'statistics.alchemycrafts': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.alchemycrafts': 1 },
+    params: { sort: { 'statistics.alchemycrafts': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'name', '???'),
+        value: `${numeral(get(x, `statistics.alchemycrafts`)).format('0.0a')} Crafts`,
+        exactValue: get(x, `statistics.alchemycrafts`).toLocaleString()
+      };
+    }
+  },
+  
+  {
+    name: 'Most Metalworking Crafts',
+    query: { 'statistics.metalworkingcrafts': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.metalworkingcrafts': 1 },
+    params: { sort: { 'statistics.metalworkingcrafts': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'name', '???'),
+        value: `${numeral(get(x, `statistics.metalworkingcrafts`)).format('0.0a')} Crafts`,
+        exactValue: get(x, `statistics.metalworkingcrafts`).toLocaleString()
+      };
+    }
+  },
+  
+  {
+    name: 'Most Spellforging Crafts',
+    query: { 'statistics.spellforgingcrafts': { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, 'statistics.spellforgingcrafts': 1 },
+    params: { sort: { 'statistics.spellforgingcrafts': -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, 'name', '???'),
+        value: `${numeral(get(x, `statistics.spellforgingcrafts`)).format('0.0a')} Crafts`,
+        exactValue: get(x, `statistics.spellforgingcrafts`).toLocaleString()
+      };
+    }
+  },
 ];
 
 exports.route = (app) => {
