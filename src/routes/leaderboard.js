@@ -5,7 +5,7 @@ const { DB } = require('../db');
 
 const RUNNER_UPS = 5;
 
-const ALWAYS_FIELDS = { 'name': 1, 'baseClass': 1 };
+const ALWAYS_FIELDS = { 'name': 1, 'baseClass': 1, 'charSlot': 1, 'username': 1 };
 
 const allQueries = [
   { cat: 'Experience Leaders' },
@@ -19,7 +19,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `xp`, 0)).format('0.000a')} XP (Lv. ${get(x, 'level', 0)})`,
-        exactValue: get(x, 'xp', 0).toLocaleString()
+        exactValue: get(x, 'xp', 0).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -35,7 +37,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.steps`)).format('0.0a')} Steps`,
-        exactValue: get(x, `statistics.steps`).toLocaleString()
+        exactValue: get(x, `statistics.steps`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -49,7 +53,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.npcsgreeted`)).format('0.0a')} NPCs`,
-        exactValue: get(x, `statistics.npcsgreeted`).toLocaleString()
+        exactValue: get(x, `statistics.npcsgreeted`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -63,7 +69,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.dailyquests`)).format('0.0a')} Quests`,
-        exactValue: get(x, `statistics.dailyquests`).toLocaleString()
+        exactValue: get(x, `statistics.dailyquests`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -77,7 +85,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.repeatablequests`)).format('0.0a')} Quests`,
-        exactValue: get(x, `statistics.repeatablequests`).toLocaleString()
+        exactValue: get(x, `statistics.repeatablequests`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -93,7 +103,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.kills`)).format('0.0a')} Kills`,
-        exactValue: get(x, `statistics.kills`).toLocaleString()
+        exactValue: get(x, `statistics.kills`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -107,7 +119,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.deaths`)).format('0.0a')} Deaths`,
-        exactValue: get(x, 'statistics.deaths').toLocaleString()
+        exactValue: get(x, 'statistics.deaths').toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -121,7 +135,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.strips`)).format('0.0a')} Times`,
-        exactValue: get(x, `statistics.strips`).toLocaleString()
+        exactValue: get(x, `statistics.strips`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
@@ -135,7 +151,9 @@ const allQueries = [
       return {
         name: get(x, 'name', '???'),
         value: `${numeral(get(x, `statistics.killslair`)).format('0.0a')} Times`,
-        exactValue: get(x, `statistics.killslair`).toLocaleString()
+        exactValue: get(x, `statistics.killslair`).toLocaleString(),
+        username: get(x, 'username', ''),
+        charSlot: get(x, 'charSlot', -1)
       };
     }
   },
