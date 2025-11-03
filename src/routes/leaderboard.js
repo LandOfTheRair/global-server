@@ -1,232 +1,319 @@
-const { get } = require('lodash');
-const numeral = require('numeral');
+const { get } = require("lodash");
+const numeral = require("numeral");
 
-const { DB } = require('../db');
+const { DB } = require("../db");
 
 const RUNNER_UPS = 5;
 
-const ALWAYS_FIELDS = { 'name': 1, 'baseClass': 1, 'charSlot': 1, 'username': 1 };
+const ALWAYS_FIELDS = { name: 1, baseClass: 1, charSlot: 1, username: 1 };
 
 const allQueries = [
-  { cat: 'Experience Leaders' },
+  { cat: "Experience Leaders" },
 
   {
-    name: 'Most Experienced',
-    query: { 'xp': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'xp': 1, 'level': 1 },
-    params: { sort: { 'xp': -1 }, limit: RUNNER_UPS },
+    name: "Most Experienced",
+    query: { xp: { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, xp: 1, level: 1 },
+    params: { sort: { xp: -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `xp`, 0)).format('0.000a')} XP (Lv. ${get(x, 'level', 0)})`,
-        exactValue: get(x, 'xp', 0).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `xp`, 0)).format("0.000a")} XP (Lv. ${get(
+          x,
+          "level",
+          0
+        )})`,
+        exactValue: get(x, "xp", 0).toLocaleString(),
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
 
-  { cat: 'World Leaders' },
+  { cat: "World Leaders" },
 
   {
-    name: 'Most Steps Taken',
-    query: { 'statistics.steps': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.steps': 1 },
-    params: { sort: { 'statistics.steps': -1 }, limit: RUNNER_UPS },
+    name: "Most Steps Taken",
+    query: { "statistics.steps": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.steps": 1 },
+    params: { sort: { "statistics.steps": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.steps`)).format('0.0a')} Steps`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.steps`)).format("0.0a")} Steps`,
         exactValue: get(x, `statistics.steps`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
 
   {
-    name: 'Most NPCs Greeted',
-    query: { 'statistics.npcsgreeted': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.npcsgreeted': 1 },
-    params: { sort: { 'statistics.npcsgreeted': -1 }, limit: RUNNER_UPS },
+    name: "Most NPCs Greeted",
+    query: { "statistics.npcsgreeted": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.npcsgreeted": 1 },
+    params: { sort: { "statistics.npcsgreeted": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.npcsgreeted`)).format('0.0a')} NPCs`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.npcsgreeted`)).format(
+          "0.0a"
+        )} NPCs`,
         exactValue: get(x, `statistics.npcsgreeted`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
 
   {
-    name: 'Most Daily Quests Completed',
-    query: { 'statistics.dailyquests': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.dailyquests': 1 },
-    params: { sort: { 'statistics.dailyquests': -1 }, limit: RUNNER_UPS },
+    name: "Most Daily Quests Completed",
+    query: { "statistics.dailyquests": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.dailyquests": 1 },
+    params: { sort: { "statistics.dailyquests": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.dailyquests`)).format('0.0a')} Quests`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.dailyquests`)).format(
+          "0.0a"
+        )} Quests`,
         exactValue: get(x, `statistics.dailyquests`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
 
   {
-    name: 'Most Repeatable Quests Completed',
-    query: { 'statistics.repeatablequests': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.repeatablequests': 1 },
-    params: { sort: { 'statistics.repeatablequests': -1 }, limit: RUNNER_UPS },
+    name: "Most Repeatable Quests Completed",
+    query: { "statistics.repeatablequests": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.repeatablequests": 1 },
+    params: { sort: { "statistics.repeatablequests": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.repeatablequests`)).format('0.0a')} Quests`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.repeatablequests`)).format(
+          "0.0a"
+        )} Quests`,
         exactValue: get(x, `statistics.repeatablequests`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
-  
-  { cat: 'Slaying Leaders' },
+
+  { cat: "Slaying Leaders" },
 
   {
-    name: 'Most Kills',
-    query: { 'statistics.kills': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.kills': 1 },
-    params: { sort: { 'statistics.kills': -1 }, limit: RUNNER_UPS },
+    name: "Most Kills",
+    query: { "statistics.kills": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.kills": 1 },
+    params: { sort: { "statistics.kills": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.kills`)).format('0.0a')} Kills`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.kills`)).format("0.0a")} Kills`,
         exactValue: get(x, `statistics.kills`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
 
   {
-    name: 'Most Deaths',
-    query: { 'statistics.deaths': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.deaths': 1 },
-    params: { sort: { 'statistics.deaths': -1 }, limit: RUNNER_UPS },
+    name: "Most Deaths",
+    query: { "statistics.deaths": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.deaths": 1 },
+    params: { sort: { "statistics.deaths": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.deaths`)).format('0.0a')} Deaths`,
-        exactValue: get(x, 'statistics.deaths').toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.deaths`)).format("0.0a")} Deaths`,
+        exactValue: get(x, "statistics.deaths").toLocaleString(),
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
-  
+
   {
-    name: 'Most Times Stripped',
-    query: { 'statistics.strips': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.strips': 1 },
-    params: { sort: { 'statistics.strips': -1 }, limit: RUNNER_UPS },
+    name: "Most Times Stripped",
+    query: { "statistics.strips": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.strips": 1 },
+    params: { sort: { "statistics.strips": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.strips`)).format('0.0a')} Times`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.strips`)).format("0.0a")} Times`,
         exactValue: get(x, `statistics.strips`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
-  
+
   {
-    name: 'Most Lairs Killed',
-    query: { 'statistics.killslair': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.killslair': 1 },
-    params: { sort: { 'statistics.killslair': -1 }, limit: RUNNER_UPS },
+    name: "Most Lairs Killed",
+    query: { "statistics.killslair": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.killslair": 1 },
+    params: { sort: { "statistics.killslair": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.killslair`)).format('0.0a')} Times`,
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.killslair`)).format(
+          "0.0a"
+        )} Times`,
         exactValue: get(x, `statistics.killslair`).toLocaleString(),
-        username: get(x, 'username', ''),
-        charSlot: get(x, 'charSlot', -1)
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
       };
-    }
+    },
   },
-  
-  { cat: 'Crafting Leaders' },
-  
+
+  { cat: "Crafting Leaders" },
+
   {
-    name: 'Most Alchemy Crafts',
-    query: { 'statistics.alchemycrafts': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.alchemycrafts': 1 },
-    params: { sort: { 'statistics.alchemycrafts': -1 }, limit: RUNNER_UPS },
+    name: "Most Alchemy Crafts",
+    query: { "statistics.alchemycrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.alchemycrafts": 1 },
+    params: { sort: { "statistics.alchemycrafts": -1 }, limit: RUNNER_UPS },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.alchemycrafts`)).format('0.0a')} Crafts`,
-        exactValue: get(x, `statistics.alchemycrafts`).toLocaleString()
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.alchemycrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(x, `statistics.alchemycrafts`).toLocaleString(),
       };
-    }
+    },
   },
-  
+
   {
-    name: 'Most Metalworking Crafts',
-    query: { 'statistics.metalworkingcrafts': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.metalworkingcrafts': 1 },
-    params: { sort: { 'statistics.metalworkingcrafts': -1 }, limit: RUNNER_UPS },
+    name: "Most Metalworking Crafts",
+    query: { "statistics.metalworkingcrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.metalworkingcrafts": 1 },
+    params: {
+      sort: { "statistics.metalworkingcrafts": -1 },
+      limit: RUNNER_UPS,
+    },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.metalworkingcrafts`)).format('0.0a')} Crafts`,
-        exactValue: get(x, `statistics.metalworkingcrafts`).toLocaleString()
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.metalworkingcrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(x, `statistics.metalworkingcrafts`).toLocaleString(),
       };
-    }
+    },
   },
-  
+
   {
-    name: 'Most Spellforging Crafts',
-    query: { 'statistics.spellforgingcrafts': { $gt: 0 } },
-    fields: { ...ALWAYS_FIELDS, 'statistics.spellforgingcrafts': 1 },
-    params: { sort: { 'statistics.spellforgingcrafts': -1 }, limit: RUNNER_UPS },
+    name: "Most Spellforging Crafts",
+    query: { "statistics.spellforgingcrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.spellforgingcrafts": 1 },
+    params: {
+      sort: { "statistics.spellforgingcrafts": -1 },
+      limit: RUNNER_UPS,
+    },
     formatter: (x) => {
       return {
-        name: get(x, 'name', '???'),
-        value: `${numeral(get(x, `statistics.spellforgingcrafts`)).format('0.0a')} Crafts`,
-        exactValue: get(x, `statistics.spellforgingcrafts`).toLocaleString()
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.spellforgingcrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(x, `statistics.spellforgingcrafts`).toLocaleString(),
       };
-    }
+    },
+  },
+
+  {
+    name: "Most Gemcrafting Crafts",
+    query: { "statistics.gemcraftingcrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.gemcraftingcrafts": 1 },
+    params: { sort: { "statistics.gemcraftingcrafts": -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.gemcraftingcrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(x, `statistics.gemcraftingcrafts`).toLocaleString(),
+      };
+    },
+  },
+
+  {
+    name: "Most Weavefabricating Crafts",
+    query: { "statistics.weavefabricatingcrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.weavefabricatingcrafts": 1 },
+    params: {
+      sort: { "statistics.weavefabricatingcrafts": -1 },
+      limit: RUNNER_UPS,
+    },
+    formatter: (x) => {
+      return {
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.weavefabricatingcrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(
+          x,
+          `statistics.weavefabricatingcrafts`
+        ).toLocaleString(),
+      };
+    },
+  },
+
+  {
+    name: "Most Foodmaking Crafts",
+    query: { "statistics.foodmakingcrafts": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.foodmakingcrafts": 1 },
+    params: { sort: { "statistics.foodmakingcrafts": -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.foodmakingcrafts`)).format(
+          "0.0a"
+        )} Crafts`,
+        exactValue: get(x, `statistics.foodmakingcrafts`).toLocaleString(),
+      };
+    },
   },
 ];
 
 exports.route = (app) => {
-  app.get('/leaderboard', async (req, res) => {
-
-    const validQueryData = allQueries.map(x => x.cat ? x : { ...x, results: DB.$statistics.find(x.query, { projection: x.fields, ...x.params }) });
+  app.get("/leaderboard", async (req, res) => {
+    const validQueryData = allQueries.map((x) =>
+      x.cat
+        ? x
+        : {
+            ...x,
+            results: DB.$statistics.find(x.query, {
+              projection: x.fields,
+              ...x.params,
+            }),
+          }
+    );
 
     const cursors = await Promise.all(validQueryData);
 
-    for(cursor of cursors) {
-      if(cursor.cat) continue;
+    for (cursor of cursors) {
+      if (cursor.cat) continue;
       cursor.arr = await cursor.results.toArray();
     }
 
-    const retData = cursors.map(x => {
-      if(x.cat) return x;
+    const retData = cursors.map((x) => {
+      if (x.cat) return x;
 
       return {
         name: x.name,
-        results: x.arr.map(y => x.formatter(y))
+        results: x.arr.map((y) => x.formatter(y)),
       };
     });
 
     const sortedRetData = [];
-    for(data of retData) {
-      if(data.cat) {
+    for (data of retData) {
+      if (data.cat) {
         sortedRetData.push({ cat: data.cat, children: [] });
       } else {
         const curCat = sortedRetData[sortedRetData.length - 1];
@@ -235,6 +322,5 @@ exports.route = (app) => {
     }
 
     res.json(sortedRetData);
-    
   });
-}
+};
