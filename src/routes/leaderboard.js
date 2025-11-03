@@ -102,6 +102,45 @@ const allQueries = [
     },
   },
 
+  {
+    name: "Most Achievements Earned",
+    query: { "statistics.achievementsearned": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.achievementsearned": 1 },
+    params: {
+      sort: { "statistics.achievementsearned": -1 },
+      limit: RUNNER_UPS,
+    },
+    formatter: (x) => {
+      return {
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.achievementsearned`)).format(
+          "0.0a"
+        )} Achievements`,
+        exactValue: get(x, `statistics.achievementsearned`).toLocaleString(),
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
+      };
+    },
+  },
+
+  {
+    name: "Most Achievements Points Earned",
+    query: { "statistics.achievementpoints": { $gt: 0 } },
+    fields: { ...ALWAYS_FIELDS, "statistics.achievementpoints": 1 },
+    params: { sort: { "statistics.achievementpoints": -1 }, limit: RUNNER_UPS },
+    formatter: (x) => {
+      return {
+        name: get(x, "name", "???"),
+        value: `${numeral(get(x, `statistics.achievementpoints`)).format(
+          "0.0a"
+        )} AP`,
+        exactValue: get(x, `statistics.achievementpoints`).toLocaleString(),
+        username: get(x, "username", ""),
+        charSlot: get(x, "charSlot", -1),
+      };
+    },
+  },
+
   { cat: "Slaying Leaders" },
 
   {
